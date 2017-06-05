@@ -1,21 +1,25 @@
+int r, g, b, y;
+
 void setup() {
-  size(1000, 1000);
+  size(1000, 500);
   background(0);
 }
 
 void draw() {
   stroke(0);
-  int r = 100;
-  int g = 100;
-  int b = 100;
-  for (int i = 0; i <= height; i += 2) {
-    r = intRandInRange(r, 10, 240, 5);
-    g = intRandInRange(g, 10, 240, 5);
-    b = intRandInRange(b, 10, 240, 5);
-    drawLine(i, color(r, g, b));
+  if (y > height) {
+    y = 0;
+    r = 100;
+    g = 100;
+    b = 100;
   }
-  //filter(BLUR, 1);
-  //noLoop();
+  
+  r = intRandInRange(r, 10, 240, 5);
+  g = intRandInRange(g, 10, 240, 5);
+  b = intRandInRange(b, 10, 240, 5);
+  drawLine(y, color(r, g, b));
+  y+=2;
+  
 }
 
 void drawLine(int y, color c) {
