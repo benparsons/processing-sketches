@@ -1,7 +1,7 @@
 int r, g, b, y;
 
 void setup() {
-  size(1000, 500);
+  size(2000, 1000);
   background(0);
 }
 
@@ -12,11 +12,12 @@ void draw() {
     r = 100;
     g = 100;
     b = 100;
+    saveFrame("big/#######.png");
   }
   
-  r = intRandInRange(r, 10, 240, 5);
-  g = intRandInRange(g, 10, 240, 5);
-  b = intRandInRange(b, 10, 240, 5);
+  r = intRandInRange(r, 10, 240, 10);
+  g = intRandInRange(g, 10, 240, 10);
+  b = intRandInRange(b, 10, 240, 10);
   drawLine(y, color(r, g, b));
   y+=2;
   
