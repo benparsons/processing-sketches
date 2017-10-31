@@ -16,5 +16,7 @@ void draw() {
   if (frame % 20 == 0) {
     filter(BLUR);
     filter(POSTERIZE, 8);
+    if (frame % 100 == 0) saveFrame("1/#####.png");
   }
+  
 }
