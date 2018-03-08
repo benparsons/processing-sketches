@@ -3,29 +3,39 @@
 // amanda, size 8, posterize 8
 import java.util.Map;
 HashMap<String, Integer> countColours;
-  PImage scene;
+PImage scene;
 LiquitexBasics basics;
+
+int particles = 100; // thousands
+int size = 5;
+String shape = "ellipse";
+int posterizeLevel = 6;
+int blurCount = 1;
+int erodeCount = 0;
+
 void setup() {
   basics = new LiquitexBasics();
   size(400, 400);
-  scene = loadImage("../images/amanda.png");
+  scene = loadImage("../images/stives.png");
+  frameRate(1);
   
 }
 void draw() {
   println(countColours().size());
   noStroke();
-  int size = 8;
-  for (int i = 0; i < 100000; i++) {
+  for (int i = 0; i < particles * 1000; i++) {
     int x = int(random(0, width));
     int y = int(random(0, height));
     fill(scene.get(x, y));
-    //ellipse(x, y, size, size);
-    rect(x, y, size, size);
+    if (shape == "ellipse") ellipse(x, y, size, size);
+    if (shape == "rect") rect(x, y, size, size);
   }
   println(countColours().size());
-  filter(BLUR);
+  for (int i = 0; i < blurCount; i++) {
+    filter(BLUR);
+  }
   println(countColours().size());
-  filter(POSTERIZE, 8);
+  filter(POSTERIZE, posterizeLevel);
   
   println(countColours().size());
 
@@ -35,7 +45,12 @@ void draw() {
   }
   updatePixels();
   println(countColours().size());
-  noLoop();
+  for (int i = 0; i < erodeCount; i++) {
+    filter(ERODE);
+  }
+  //blurCount++;
+  //noLoop();
+  //saveFrame("#####.png");
 }
 
 HashMap<String, Integer> countColours() {
