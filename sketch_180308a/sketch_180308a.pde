@@ -3,11 +3,12 @@
 // amanda, size 8, posterize 8
 import java.util.Map;
 HashMap<String, Integer> countColours;
-
+LiquitexBasics basics;
 void setup() {
+  basics = new LiquitexBasics();
   size(400, 400);
   PImage scene;
-  scene = loadImage("amanda.png");
+  scene = loadImage("../images/amanda.png");
   
   image(scene, 0, 0);
   println(countColours().size());
@@ -23,14 +24,15 @@ void setup() {
   filter(BLUR);
   println(countColours().size());
   filter(POSTERIZE, 8);
-  //image(scene, 0, 0);
   
-  //for (Map.Entry me : countColours.entrySet()) {
-  //  print(me.getKey() + " is ");
-  //  println(me.getValue());
-  //}
   println(countColours().size());
 
+  loadPixels();
+  for (int i = 0; i < pixels.length; i++) {
+    pixels[i] = getNearest(pixels[i], basics.colors);
+  }
+  updatePixels();
+  println(countColours().size());
 }
 
 HashMap<String, Integer> countColours() {
@@ -47,4 +49,23 @@ HashMap<String, Integer> countColours() {
     }
   }
   return colourCount;
+}
+
+int getNearest(int input, int[] choices){
+  int c = 0; //<>//
+  int r = int(red(input));
+  int g = int(green(input));
+  int b = int(blue(input));
+  int bestDist = 766;
+  for(int i = 0; i < choices.length; i++){
+    int R = int(red(choices[i]));
+    int G = int(green(choices[i]));
+    int B = int(blue(choices[i]));
+    int dist = abs(R - r) + abs(G - g) + abs(B - b);
+    if(dist < bestDist){
+      c = choices[i];
+      bestDist = dist;
+    }
+  }
+  return c;
 }
