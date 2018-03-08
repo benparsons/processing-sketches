@@ -3,22 +3,24 @@
 // amanda, size 8, posterize 8
 import java.util.Map;
 HashMap<String, Integer> countColours;
+  PImage scene;
 LiquitexBasics basics;
 void setup() {
   basics = new LiquitexBasics();
   size(400, 400);
-  PImage scene;
   scene = loadImage("../images/amanda.png");
   
-  image(scene, 0, 0);
+}
+void draw() {
   println(countColours().size());
   noStroke();
   int size = 8;
-  for (int i = 0; i < 2000; i++) {
+  for (int i = 0; i < 100000; i++) {
     int x = int(random(0, width));
     int y = int(random(0, height));
     fill(scene.get(x, y));
-    ellipse(x, y, size, size);
+    //ellipse(x, y, size, size);
+    rect(x, y, size, size);
   }
   println(countColours().size());
   filter(BLUR);
@@ -33,6 +35,7 @@ void setup() {
   }
   updatePixels();
   println(countColours().size());
+  noLoop();
 }
 
 HashMap<String, Integer> countColours() {
