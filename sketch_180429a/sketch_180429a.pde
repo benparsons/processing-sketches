@@ -28,7 +28,9 @@ void draw() {
   println(quarter);
   Point cp1 = new Point(start.x + quarter.x, start.y + quarter.y);
   Point cp2 = new Point(start.x + quarter.x * 3, start.y + quarter.y * 3);
-  bezier(start.x, start.y, cp1.x, cp1.y + 50, cp2.x, cp2.y - 50, end.x, end.y);
-  
+  for (int i = 0; i < 10; i++) {
+    int movement = int(random(-50, 50));
+    bezier(start.x, start.y, cp1.x + movement, cp1.y + movement, cp2.x + movement, cp2.y + movement, end.x, end.y);
+  }
   noLoop();
 }
