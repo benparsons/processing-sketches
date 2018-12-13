@@ -17,6 +17,7 @@ void setup() {
   basics = new LiquitexBasics();
   size(400, 400);
   scene = loadImage("../images/stives.png");
+  println(scene.width);
   frameRate(1);
   
 }
@@ -50,7 +51,7 @@ void draw() {
   }
   //blurCount++;
   //noLoop();
-  //saveFrame("#####.png");
+  saveFrame("#####.png");
 }
 
 HashMap<String, Integer> countColours() {
