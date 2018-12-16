@@ -1,11 +1,16 @@
 import java.util.*;
 
 PImage photo;
-ArrayList al = new ArrayList<My>();
 
 void setup() {
   size(400, 400);
-  photo = loadImage("../images/stives.png");
+  photo = loadImage("../images/pinkseasunset.png");
+  println(photo.width);
+  
+  surface.setResizable(true);
+  surface.setSize(photo.width, photo.height);
+
+  
 }
 
 void draw() {
@@ -19,15 +24,17 @@ void draw() {
   println("brightness: " + brightness(photo.get(50,50)) );
   
   loadPixels();
-  for (int i = 0; i < (width*height); i++) {
-    //pixels[i] = pixels[pixels.length-i-1];
-    al.add(new My(pixels[i]));
+  for (int i = 0; i < height; i++) { // for each row
+    ArrayList al = new ArrayList<My>();
+    for (int p = 0; p < width; p++) { // for each pixel in the row
+      al.add(new My(pixels[i * width + p]));
+    }
+    Collections.sort(al);
+    for (int p = 0; p < width; p++) { // for each pixel in the row
+      pixels[i * width + p] = ((My)al.get(p)).col;
+    }
   }
-  Collections.sort(al);
   
-  for (int i = 0; i < (width*height); i++) {
-    pixels[i] = ((My)al.get(i)).col;
-  }
   updatePixels();
 }
 
@@ -39,6 +46,6 @@ class My implements Comparable<My> {
   }
   
   public int compareTo(My my) {
-    return (int) Math.signum(brightness(col) - brightness(my.col));
+    return (int) Math.signum(hue(col) - hue(my.col));
   }
 }

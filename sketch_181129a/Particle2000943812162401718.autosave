@@ -1,0 +1,32 @@
+class Particle {
+  int x;
+  int y;
+  float speed = 2;
+  
+  Particle(int _x, int _y) {
+    x = _x;
+    y = _y;
+  }
+  
+  void render() {
+    stroke(0);
+    strokeWeight(5);
+    point(x, y);
+  }
+  
+  void move(PGraphics textP) {
+    x += int(random(-speed,speed));
+    y += int(random(-speed,speed));
+    float blues = blue(textP.get(x, y));
+    //println(blues);
+    if (blues == 0) {
+      speed = 0;
+    } else {
+      speed += 0.1;
+    }
+    if (speed == 0 && random(1) > 0.8) {
+      println("released");
+      speed = 2;
+    }
+  }
+}
