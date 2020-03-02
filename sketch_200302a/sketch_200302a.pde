@@ -1,3 +1,5 @@
+// inspired by https://twitter.com/concinnus/status/1234478586523865090
+
 int x, y;
 int angle = 0;
 
@@ -15,9 +17,10 @@ void draw() {
   int radius = 5;
   for (int i = 0; i < 299; i++) {
     col ++;
-    if (col == 50) {
+    if (col == 60) {
       col = 0;
       radius += 5;
+      i -= 10;
     }
     stroke(col);
     ellipse(x + radius * cos(radians(angle)), y + radius * sin(radians(angle)),300-i,300-i);
