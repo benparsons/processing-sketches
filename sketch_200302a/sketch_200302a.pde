@@ -6,6 +6,7 @@ int angle = 0;
 void setup() {
   size (400, 400);
   noFill();
+  strokeWeight(2);
   x = width/2;
   y = height/2;
   //frameRate(2);
